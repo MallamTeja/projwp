@@ -29,7 +29,7 @@ const TechCard = ({ tech }) => {
   return (
     <motion.div
       className="tech-card"
-      whileHover={{ scale: 1.05 }}
+      whileHover={{ scale: 0.80 }}
       whileTap={{ scale: 0.95 }}
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}

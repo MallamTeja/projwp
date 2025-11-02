@@ -10,11 +10,11 @@ const Footer = () => {
           <div className="footer-brand">
             <div className="brand-logo">
               <i className="fas fa-code"></i>
-              <span>DevPathStack</span>
+              <span>FullstackSchool</span>
             </div>
             <p>Interactive guide to modern development technologies</p>
             <div className="social-links">
-              <a href="https://github.com/devpathstack/devpathstack" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+              <a href="https://github.com/fullstackschool/fullstackschool" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                 <i className="fab fa-github"></i>
               </a>
               <a href="#" aria-label="Twitter"><i className="fab fa-twitter"></i></a>
@@ -51,7 +51,7 @@ const Footer = () => {
         </div>
         
         <div className="footer-bottom">
-          <p>&copy; 2025 DevPathStack. Made with ❤️ for developers worldwide.</p>
+          <p>&copy; 2025 FullstackSchool. Made with ❤️ for developers worldwide.</p>
         </div>
       </div>
     </footer>

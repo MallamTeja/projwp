@@ -173,10 +173,10 @@
 }
 
 .problem-content h2 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #ffffff;
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
   font-weight: 700;
 }
 
@@ -237,10 +237,10 @@
 }
 
 .solution-content h2 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #ffffff;
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
   font-weight: 700;
 }
 
@@ -328,7 +328,7 @@
 
 .learning-paths-header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
 }
 
 .section-heading {
@@ -502,15 +502,15 @@
 
 /* Features Section */
 .features-section {
-  padding: 6rem 0;
+  padding: 4rem 0;
   background: rgba(15, 23, 42, 0.8);
 }
 
 .features-header h2 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #ffffff;
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
   font-weight: 700;
 }
 
@@ -577,15 +577,15 @@
 
 /* Social Proof Section */
 .social-proof-section {
-  padding: 6rem 0;
+  padding: 4rem 0;
   background: linear-gradient(135deg, rgba(30, 41, 59, 0.5), rgba(15, 23, 42, 0.5));
 }
 
 .social-proof-content h2 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #ffffff;
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3rem;
   font-weight: 700;
 }
 
@@ -663,7 +663,7 @@
 
 /* Final CTA Section */
 .final-cta-section {
-  padding: 6rem 0;
+  padding: 4rem 0;
   background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(100, 255, 218, 0.1));
 }
 
@@ -674,9 +674,9 @@
 }
 
 .cta-content h2 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   color: #ffffff;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
   font-weight: 700;
 }
 

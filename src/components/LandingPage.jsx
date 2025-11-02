@@ -202,7 +202,7 @@ const LandingPage = () => {
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
-            <h2>DevPathStack Shows You the Exact Learning Path</h2>
+            <h2>FullstackSchool Shows You the Exact Learning Path</h2>
             <p className="solution-description">
               Interactive tech tree that reveals dependencies, shows real-world connections, 
               and guides you through the optimal learning sequence for any stack.
@@ -360,7 +360,7 @@ const LandingPage = () => {
             <div className="testimonials-grid">
               <div className="testimonial">
                 <div className="testimonial-content">
-                  <p>"DevPathStack saved me months of confusion. The tech tree visualization is genius!"</p>
+                  <p>"FullstackSchool saved me months of confusion. The tech tree visualization is genius!"</p>
                 </div>
                 <div className="testimonial-author">
                   <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=60&h=60&fit=crop&crop=face" alt="Sarah Chen" />

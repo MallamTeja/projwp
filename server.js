@@ -16,7 +16,7 @@ app.get('/api/technologies', (req, res) => {
 app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'OK', 
-    message: 'DevPathStack server is running!',
+    message: 'FullstackSchool server is running!',
     timestamp: new Date().toISOString()
   });
 });
@@ -27,7 +27,7 @@ app.get('*', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log('🚀 DevPathStack Server Started!');
+  console.log('🚀 FullstackSchool Server Started!');
   console.log(`📱 Local: http://localhost:${PORT}`);
   console.log(`🌐 Server running on port ${PORT}`);
   console.log('🎯 Ready to teach developers modern tech stacks!');

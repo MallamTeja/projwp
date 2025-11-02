@@ -10,7 +10,7 @@ const Navbar = ({ currentPage, setCurrentPage }) => {
     setOpen(false);
   }, [currentPage]);
   const navItems = [
-    { key: 'home', label: 'DevPathStack', icon: 'fas fa-code' },
+    { key: 'home', label: 'FullstackSchool', icon: 'fas fa-code' },
     { key: 'frontend', label: 'Frontend', icon: 'fas fa-desktop' },
     { key: 'backend', label: 'Backend', icon: 'fas fa-server' },
     { key: 'database', label: 'Database', icon: 'fas fa-database' },
@@ -29,7 +29,7 @@ const Navbar = ({ currentPage, setCurrentPage }) => {
         <div className="nav-brand" onClick={() => setCurrentPage('home')} role="button" tabIndex={0} aria-label="Go home">
           <div>
             <i className="fas fa-code" aria-hidden></i>
-            <span>DevPathStack</span>
+            <span>FullstackSchool</span>
           </div>
           <small className="tagline">Where confused devs get unconfused</small>
         </div>
