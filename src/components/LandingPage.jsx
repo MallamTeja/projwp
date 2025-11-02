@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import './LandingPage.css';
 import HeroSection from './HeroSection';
-import AboutSection from './AboutSection';
 import HowItWorks from './HowItWorks';
 import PreviewSection from './PreviewSection';
 
@@ -30,7 +29,6 @@ const LandingPage = ({ setCurrentPage }) => {
   return (
     <div className="landing-page">
       <HeroSection setCurrentPage={setCurrentPage} />
-      <AboutSection />
       <HowItWorks />
       <PreviewSection />
 

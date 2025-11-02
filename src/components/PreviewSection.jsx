@@ -19,7 +19,7 @@ const PreviewSection = () => {
 
           <div className="cards-mock">
             <div className="tech-card small card">
-              <i className="fab fa-react"></i> MERN
+              <i className="fab fa-node-js"></i> MERN
             </div>
             <div className="tech-card small card">
               <i className="fab fa-angular"></i> MEAN
@@ -28,7 +28,7 @@ const PreviewSection = () => {
               <i className="fab fa-java"></i> Java Stack
             </div>
             <div className="tech-card small card">
-              <i className="fab fa-python"></i> LAMP/LEMP
+              <i className="fab fa-php"></i> LAMP/LEMP
             </div>
           </div>
         </div>

@@ -1,10 +1,12 @@
 /* PreviewSection styles */
 .preview-section { padding: 2rem 1rem; }
+.preview-section h2 { font-size: 1.4rem; }
+.preview-section .lead { font-size: 0.9rem; }
 .preview-grid { display: grid; gap: 1rem; grid-template-columns: 1fr; align-items: start; }
-.roadmap-mock { padding: 1rem; display:flex; gap:0.5rem; justify-content:space-around; align-items:center; }
-.roadmap-mock .node { background: rgba(0,255,255,0.06); padding:0.6rem 0.9rem; border-radius:10px; }
-.cards-mock { display:flex; gap:0.6rem; justify-content:center; flex-wrap:wrap; }
-.tech-card.small { padding:0.6rem 0.9rem; border-radius:10px; }
+.roadmap-mock { padding: 0.8rem; display:flex; gap:0.4rem; justify-content:space-around; align-items:center; }
+.roadmap-mock .node { background: rgba(0,255,255,0.06); padding:0.5rem 0.7rem; border-radius:8px; font-size: 0.8rem; }
+.cards-mock { display:flex; gap:0.5rem; justify-content:center; flex-wrap:wrap; }
+.tech-card.small { padding:0.5rem 0.7rem; border-radius:8px; font-size: 0.8rem; }
 .card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.03); border-radius:12px; }
 
 @media (min-width: 768px) { .preview-grid { grid-template-columns: 1fr 420px; } }
