@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import './LandingPage.css';
 import HeroSection from './HeroSection';
 import HowItWorks from './HowItWorks';
-import PreviewSection from './PreviewSection';
 
 const LandingPage = ({ setCurrentPage }) => {
   const [email, setEmail] = useState('');
@@ -30,7 +29,6 @@ const LandingPage = ({ setCurrentPage }) => {
     <div className="landing-page">
       <HeroSection setCurrentPage={setCurrentPage} />
       <HowItWorks />
-      <PreviewSection />
 
       {/* Problem Section */}
       <section className="problem-section">
