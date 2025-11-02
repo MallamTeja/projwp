@@ -29,7 +29,7 @@ const HeroSection = ({ setCurrentPage }) => {
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
               onClick={handleCTA}
-              aria-label="Explore Frontend Technologies"
+              aria-label="Explore Frontend"
             >
               Take a Look
             </motion.button>

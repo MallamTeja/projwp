@@ -30,21 +30,6 @@ const Database = () => {
       style={{ paddingTop: '90px', minHeight: '100vh' }}
     >
       <div className="container">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="page-header"
-          style={{ textAlign: 'center', padding: '3rem 0 2rem' }}
-        >
-          <h1 style={{ fontSize: '3rem', marginBottom: '1rem', color: '#ffffff' }}>
-            Database Technologies
-          </h1>
-          <p style={{ fontSize: '1.2rem', color: '#94a3b8', maxWidth: '600px', margin: '0 auto' }}>
-            Master data storage, retrieval, and management systems for modern applications
-          </p>
-        </motion.div>
-
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
         <TechGrid technologies={filteredTechnologies} />
       </div>

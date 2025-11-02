@@ -558,28 +558,7 @@
       "leads_to": [],
       "iconUrl": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/webrtc/webrtc-original.svg"
     },
-    {
-      "id": 43,
-      "name": "Kafka",
-      "category": "Messaging",
-      "desc": "Distributed streaming platform for building real-time data pipelines and event-driven architectures. Durable, partitioned logs with high throughput and fault tolerance. Great for analytics and event sourcing.",
-      "url": "https://kafka.apache.org/",
-      "dependencies": [],
-      "leads_to": [
-        "Stream Processing"
-      ],
-      "iconUrl": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg"
-    },
-    {
-      "id": 44,
-      "name": "RabbitMQ",
-      "category": "Messaging",
-      "desc": "Traditional message broker implementing AMQP. Useful for decoupling services, retry policies, and guaranteed delivery patterns. Easier to reason about for smaller systems compared to Kafka.",
-      "url": "https://www.rabbitmq.com/",
-      "dependencies": [],
-      "leads_to": [],
-      "iconUrl": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/rabbitmq/rabbitmq-original.svg"
-    },
+
     {
       "id": 45,
       "name": "Load Balancing",
@@ -605,30 +584,7 @@
       ],
       "iconUrl": "https://via.placeholder.com/48"
     },
-    {
-      "id": 47,
-      "name": "Prometheus",
-      "category": "Observability",
-      "desc": "Metrics collection and alerting toolkit for monitoring applications and infrastructure. Works well with Grafana for dashboards and alerting rules for production readiness.",
-      "url": "https://prometheus.io/",
-      "dependencies": [],
-      "leads_to": [
-        "Grafana"
-      ],
-      "iconUrl": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prometheus/prometheus-original.svg"
-    },
-    {
-      "id": 48,
-      "name": "Grafana",
-      "category": "Observability",
-      "desc": "Visualization and analytics platform used to query, visualize and alert on metrics and logs. Pairs with Prometheus, Loki, and tracing providers to give an observability stack.",
-      "url": "https://grafana.com/",
-      "dependencies": [
-        "Prometheus"
-      ],
-      "leads_to": [],
-      "iconUrl": "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/grafana/grafana-original.svg"
-    },
+
     {
       "id": 49,
       "name": "Event Sourcing",
