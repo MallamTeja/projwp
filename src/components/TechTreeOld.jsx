@@ -113,74 +113,71 @@ const TechTree = () => {
     );
   };
 
-  // Organized layout algorithm
-  const calculateOrganizedLayout = (nodes, category) => {
-    if (category === 'All') {
-      // Create organized grid layout by category
-      const categoryOrder = ['Frontend', 'Backend', 'Database', 'DevOps', 'AWS', 'Messaging', 'CI/CD', 'Observability', 'Realtime', 'Blockchain', 'AI / ML', 'Deployment'];
-      const categoryGroups = {};
+  // Auto-layout algorithm for better organization
+  const calculateAutoLayout = (nodes, category) => {
+    const categoryGroups = {};
+    const levelGroups = {};
+    
+    // Group nodes by category and level
+    nodes.forEach(node => {
+      if (!categoryGroups[node.category]) {
+        categoryGroups[node.category] = [];
+      }
+      categoryGroups[node.category].push(node);
       
-      // Group nodes by category
-      nodes.forEach(node => {
-        if (!categoryGroups[node.category]) {
-          categoryGroups[node.category] = [];
-        }
-        categoryGroups[node.category].push(node);
-      });
+      if (!levelGroups[node.level]) {
+        levelGroups[node.level] = [];
+      }
+      levelGroups[node.level].push(node);
+    });
 
-      const positionedNodes = [];
-      const categoriesPerRow = 3;
-      const categorySpacing = 300;
-      const nodeSpacing = 160;
-      const rowSpacing = 350;
+    // Calculate organized positions
+    const organizedNodes = [];
+    const categoryPositions = {
+      'Frontend': { startX: 100, startY: 100 },
+      'Backend': { startX: 500, startY: 100 },
+      'Database': { startX: 900, startY: 100 },
+      'DevOps': { startX: 100, startY: 400 },
+      'AWS': { startX: 500, startY: 400 },
+      'Messaging': { startX: 900, startY: 400 },
+      'CI/CD': { startX: 1300, startY: 100 },
+      'Observability': { startX: 1300, startY: 300 },
+      'Realtime': { startX: 100, startY: 700 },
+      'Blockchain': { startX: 500, startY: 700 },
+      'AI / ML': { startX: 900, startY: 700 },
+      'Deployment': { startX: 1300, startY: 500 },
+      'Cloud': { startX: 700, startY: 400 }
+    };
 
-      categoryOrder.forEach((categoryName, categoryIndex) => {
-        if (categoryGroups[categoryName]) {
-          const categoryNodes = categoryGroups[categoryName].sort((a, b) => a.level - b.level);
-          const categoryCol = categoryIndex % categoriesPerRow;
-          const categoryRow = Math.floor(categoryIndex / categoriesPerRow);
-          
-          const categoryX = 150 + categoryCol * categorySpacing;
-          const categoryY = 100 + categoryRow * rowSpacing;
-          
-          categoryNodes.forEach((node, nodeIndex) => {
-            const nodesPerRow = 2;
-            const nodeRow = Math.floor(nodeIndex / nodesPerRow);
-            const nodeCol = nodeIndex % nodesPerRow;
-            
-            const nodeX = categoryX + nodeCol * nodeSpacing;
-            const nodeY = categoryY + nodeRow * 100;
-            
-            positionedNodes.push({
-              ...node,
-              position: { x: nodeX, y: nodeY }
-            });
-          });
-        }
-      });
+    nodes.forEach((node, index) => {
+      const categoryPos = categoryPositions[node.category] || { startX: 100, startY: 100 };
+      const categoryNodes = categoryGroups[node.category];
+      const nodeIndex = categoryNodes.findIndex(n => n.id === node.id);
       
-      return positionedNodes;
-    } else {
-      // For specific category, arrange by level hierarchy
-      const levelGroups = {};
-      nodes.forEach(node => {
-        if (!levelGroups[node.level]) {
-          levelGroups[node.level] = [];
-        }
-        levelGroups[node.level].push(node);
+      // Calculate position within category group
+      const nodesPerRow = 3;
+      const row = Math.floor(nodeIndex / nodesPerRow);
+      const col = nodeIndex % nodesPerRow;
+      
+      const x = categoryPos.startX + (col * 150);
+      const y = categoryPos.startY + (row * 80) + (node.level * 20);
+      
+      organizedNodes.push({
+        ...node,
+        position: { x, y }
       });
+    });
 
-      const positionedNodes = [];
-      const levelSpacing = 180;
-      const nodeSpacing = 200;
+    return organizedNodes;
+  };
 
-      Object.keys(levelGroups).sort((a, b) => a - b).forEach((level, levelIndex) => {
-        const levelNodes = levelGroups[level];
-        const levelY = 100 + levelIndex * levelSpacing;
-        const startX = 150 + (400 - (levelNodes.length - 1) * nodeSpacing / 2);
+  // Initialize nodes and edges from data
+  React.useEffect(() => {
+    handleCategoryChange('All');
+  }, [setNodes, setEdges]);- (levelNodes.length - 1) * nodeSpacingX / 2;
 
         levelNodes.forEach((node, nodeIndex) => {
-          const nodeX = startX + nodeIndex * nodeSpacing;
+          const nodeX = startX + nodeIndex * nodeSpacingX;
           positionedNodes.push({
             ...node,
             position: { x: nodeX, y: levelY }
@@ -192,10 +189,70 @@ const TechTree = () => {
     }
   };
 
-  // Initialize nodes and edges
+  // Initialize nodes and edges from data
   React.useEffect(() => {
-    handleCategoryChange('All');
-  }, []);
+    // Initialize with 'All' category showing all nodes and edges
+    const relatedNodeIds = getRelatedNodes('All');
+    const filteredEdgeData = getFilteredEdges(relatedNodeIds);
+    const relevantNodes = treeData.nodes.filter(node => relatedNodeIds.includes(node.id));
+    const positionedNodes = calculateNodePositions(relevantNodes, 'All');
+    
+    const initialNodes = positionedNodes.map((node) => ({
+      id: node.id,
+      type: 'default',
+      position: node.position,
+      data: {
+        label: node.name,
+        category: node.category,
+        level: node.level,
+        color: node.color,
+      },
+      style: {
+        background: node.color,
+        color: '#ffffff',
+        border: '2px solid #00ffff',
+        borderRadius: '12px',
+        padding: '12px 16px',
+        fontSize: '13px',
+        fontWeight: 'bold',
+        minWidth: '120px',
+        maxWidth: '160px',
+        textAlign: 'center',
+        boxShadow: `0 4px 20px ${node.color}40`,
+      },
+    }));
+
+    const initialEdges = filteredEdgeData.map((edge) => ({
+      id: edge.id,
+      source: edge.source,
+      target: edge.target,
+      type: 'smoothstep',
+      animated: true,
+      style: {
+        stroke: getEdgeColor(edge.type),
+        strokeWidth: 3,
+      },
+      markerEnd: {
+        type: 'arrowclosed',
+        color: getEdgeColor(edge.type),
+        width: 20,
+        height: 20,
+      },
+      label: getEdgeLabel(edge.type),
+      labelStyle: {
+        fontSize: '10px',
+        fontWeight: 'bold',
+        color: getEdgeColor(edge.type),
+      },
+      labelBgStyle: {
+        fill: 'rgba(0,0,0,0.8)',
+        fillOpacity: 0.8,
+      },
+    }));
+
+    setNodes(initialNodes);
+    setEdges(initialEdges);
+  }, [setNodes, setEdges]);
 
   const onConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), [setEdges]);
 
@@ -220,10 +277,9 @@ const TechTree = () => {
     const relatedNodeIds = getRelatedNodes(category);
     const filteredEdgeData = getFilteredEdges(relatedNodeIds);
     const relevantNodes = treeData.nodes.filter(node => relatedNodeIds.includes(node.id));
-    const positionedNodes = calculateAutoLayout(relevantNodes, category);
+    const positionedNodes = calculateNodePositions(relevantNodes, category);
     
-    // Create organized nodes
-    // Create nodes with organized positions and enhanced styling
+    // Create nodes with organized positions
     const updatedNodes = positionedNodes.map((node) => ({
       id: node.id,
       type: 'default',
@@ -235,56 +291,50 @@ const TechTree = () => {
         color: node.color,
       },
       style: {
-        background: `linear-gradient(135deg, ${node.color}dd, ${node.color}aa)`,
+        background: node.color,
         color: '#ffffff',
-        border: `2px solid ${node.category === category && category !== 'All' ? '#00ffff' : 'rgba(255,255,255,0.2)'}`,
-        borderRadius: '16px',
-        padding: '14px 18px',
-        fontSize: '12px',
-        fontWeight: '600',
-        minWidth: '130px',
-        maxWidth: '180px',
+        border: `2px solid ${node.category === category || category === 'All' ? '#00ffff' : 'rgba(255,255,255,0.3)'}`,
+        borderRadius: '12px',
+        padding: '12px 16px',
+        fontSize: '13px',
+        fontWeight: 'bold',
+        minWidth: '120px',
+        maxWidth: '160px',
         textAlign: 'center',
-        boxShadow: `
-          0 8px 32px ${node.color}20,
-          inset 0 1px 0 rgba(255, 255, 255, 0.2),
-          0 4px 12px rgba(0, 0, 0, 0.3)
-        `,
-        backdropFilter: 'blur(8px)',
-        textShadow: '0 1px 2px rgba(0, 0, 0, 0.5)',
-        transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+        boxShadow: `0 4px 20px ${node.color}40`,
       },
     }));
 
-    // Create cleaner edges
+    // Create edges with cleaner styling
     const updatedEdges = filteredEdgeData.map((edge) => ({
       id: edge.id,
       source: edge.source,
       target: edge.target,
       type: 'smoothstep',
-      animated: false,
+      animated: false, // Disable animation for cleaner look
       style: {
         stroke: getEdgeColor(edge.type),
         strokeWidth: 2,
-        strokeOpacity: category === 'All' ? 0.5 : 0.8,
+        strokeOpacity: 0.7,
       },
       markerEnd: {
         type: 'arrowclosed',
         color: getEdgeColor(edge.type),
-        width: 12,
-        height: 12,
+        width: 15,
+        height: 15,
       },
-      label: category !== 'All' ? getEdgeLabel(edge.type) : '',
+      label: category !== 'All' ? getEdgeLabel(edge.type) : '', // Only show labels for specific categories
       labelStyle: {
         fontSize: '9px',
         fontWeight: '600',
         color: getEdgeColor(edge.type),
+        fill: getEdgeColor(edge.type),
       },
       labelBgStyle: {
-        fill: 'rgba(15, 23, 42, 0.9)',
+        fill: 'rgba(0,0,0,0.9)',
         fillOpacity: 0.9,
-        rx: 4,
-        ry: 4,
+        rx: 3,
+        ry: 3,
       },
     }));
 
@@ -342,18 +392,9 @@ const TechTree = () => {
             onEdgesChange={onEdgesChange}
             onConnect={onConnect}
             fitView
-            fitViewOptions={{
-              padding: 0.2,
-              minZoom: 0.1,
-              maxZoom: 1.5,
-            }}
             attributionPosition="bottom-left"
           >
-            <Controls 
-              showZoom={true}
-              showFitView={true}
-              showInteractive={false}
-            />
+            <Controls />
             <MiniMap
               style={{
                 background: '#1e293b',
@@ -363,7 +404,7 @@ const TechTree = () => {
             />
             <Background 
               color="#64ffda" 
-              gap={20} 
+              gap={16} 
               size={1}
               style={{ backgroundColor: '#0f172a' }}
             />
@@ -399,7 +440,7 @@ const TechTree = () => {
           </ReactFlow>
         </div>
 
-        {/* Enhanced Info Panel */}
+        {/* Info Panel */}
         <motion.div
           className="tree-info"
           initial={{ opacity: 0, y: 20 }}
@@ -408,19 +449,19 @@ const TechTree = () => {
         >
           <div className="info-cards">
             <div className="info-card">
-              <i className="fas fa-sitemap"></i>
-              <h3>Organized Layout</h3>
-              <p>Technologies are grouped by category with clean, hierarchical positioning</p>
+              <i className="fas fa-route"></i>
+              <h3>Learning Paths</h3>
+              <p>Follow the arrows to understand the optimal learning sequence</p>
             </div>
             <div className="info-card">
               <i className="fas fa-filter"></i>
-              <h3>Smart Filtering</h3>
-              <p>Filter by category to focus on specific technology ecosystems and their connections</p>
+              <h3>Category Filtering</h3>
+              <p>Filter by technology category to focus on specific learning areas</p>
             </div>
             <div className="info-card">
               <i className="fas fa-search-plus"></i>
               <h3>Interactive Exploration</h3>
-              <p>Zoom, pan, and explore relationships with labeled connections and mini-map navigation</p>
+              <p>Zoom, pan, and explore the relationships between technologies</p>
             </div>
           </div>
         </motion.div>

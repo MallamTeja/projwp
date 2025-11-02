@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -11,6 +12,7 @@ import CategorySelector from './components/CategorySelector';
 import TechGrid from './components/TechGrid';
 import TechTree from './components/TechTree';
 import Footer from './components/Footer';
+import TechDetail from './pages/TechDetail';
 
 // Data
 import techData from './data/techlist.json';
@@ -115,23 +117,28 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} />
-      {/* Global search available on all pages except home */}
-      {currentPage !== 'home' && (
-        <div style={{ paddingTop: '80px' }}>
-          <div className="container">
-            <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+    <BrowserRouter>
+      <div className="App">
+        <Navbar currentPage={currentPage} setCurrentPage={setCurrentPage} />
+        {/* Global search available on all pages except home */}
+        {currentPage !== 'home' && (
+          <div style={{ paddingTop: '80px' }}>
+            <div className="container">
+              <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+            </div>
           </div>
-        </div>
-      )}
-      
-      <AnimatePresence mode="wait">
-        {renderPage()}
-      </AnimatePresence>
+        )}
 
-      {currentPage !== 'home' && <Footer />}
-    </div>
+        <Routes>
+          <Route path="/" element={
+            <AnimatePresence mode="wait">{renderPage()}</AnimatePresence>
+          } />
+          <Route path="/tech/:id" element={<TechDetail />} />
+        </Routes>
+
+        {currentPage !== 'home' && <Footer />}
+      </div>
+    </BrowserRouter>
   );
 }
 

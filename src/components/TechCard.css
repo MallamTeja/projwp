@@ -100,10 +100,10 @@
 }
 
 .tech-description {
-  flex: 1;
+  flex: 0;
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
 }
 
 .tech-description p {
@@ -117,8 +117,8 @@
 .learn-more-btn {
   background: linear-gradient(90deg, var(--primary-start), var(--primary-end));
   border: none;
-  padding: 0.7rem 1.25rem;
-  border-radius: 14px;
+  padding: 0.6rem 1rem;
+  border-radius: 12px;
   color: var(--cta-text, #fafbfd);
   font-weight: 700;
   font-size: 0.9rem;
@@ -142,7 +142,7 @@
 
 @media (max-width: 768px) {
   .tech-card { max-width: 100%; margin: 0.5rem auto; }
-  .card-inner { min-height: 130px; }
+  .card-inner { min-height: 160px; }
   .tech-name { font-size: 1rem; }
   .tech-description p { font-size: 0.85rem; }
 }
@@ -150,12 +150,24 @@
 @media (min-width: 1024px) {
   /* on larger screens give cards a bit more height and spacing */
   .tech-card { max-width: none; }
-  .card-inner { min-height: 160px; padding: 1.25rem; }
+  .card-inner { min-height: 180px; padding: 1.1rem; }
   .tech-name { font-size: 1.2rem; }
-  .learn-more-btn { padding: 0.8rem 1.4rem; font-size: 0.95rem; }
+  .learn-more-btn { padding: 0.7rem 1.2rem; font-size: 0.95rem; }
 }
 
 /* Ensure consistent spacing when cards are within a grid (remove extra outer margins) */
 .tech-grid .tech-card {
   margin: 0;
 }
+
+/* Meta rows and chips */
+.tech-meta { width: 100%; text-align: left; margin: 0.4rem 0; }
+.meta-label { font-size: 0.8rem; color: #93c5fd; display: block; margin-bottom: 0.25rem; }
+.chips { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.chip { padding: 0.2rem 0.5rem; border-radius: 10px; font-size: 0.75rem; border: 1px solid rgba(255,255,255,0.08); color: #e2e8f0; background: rgba(255,255,255,0.05); }
+.chip-dep { border-color: rgba(244,114,182,0.35); background: rgba(244,114,182,0.08); }
+.chip-leads { border-color: rgba(52,211,153,0.35); background: rgba(52,211,153,0.08); }
+
+.card-actions { width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; margin-top: 0.75rem; }
+.btn-ghost { background: transparent; border: 1px solid rgba(255,255,255,0.12); color: #e2e8f0; padding: 0.6rem 1rem; border-radius: 12px; display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 600; cursor: pointer; }
+.btn-ghost:hover { background: rgba(255,255,255,0.06); }

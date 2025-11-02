@@ -15,26 +15,35 @@ const TechCard = ({ tech }) => {
     setIsTouch(Boolean(touch));
   }, []);
 
-  const handleLearnMore = () => {
-    window.open(tech.url, '_blank');
+  const openOfficial = () => {
+    if (tech?.url) window.open(tech.url, '_blank', 'noopener');
   };
 
-  const handleCardClick = (e) => {
-    // On touch devices toggle flip on card tap. Prevent flipping when clicking the Learn More button.
+  const openDetails = () => {
+    window.location.href = `/tech/${tech.id}`;
+  };
+
+  const handleCardClick = () => {
+    // Touch: toggle flip; Desktop: open details page
     if (isTouch) {
       setFlipped((s) => !s);
+    } else {
+      openDetails();
     }
   };
 
   return (
     <motion.div
       className="tech-card"
-      whileHover={{ scale: 0.80 }}
-      whileTap={{ scale: 0.95 }}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.3 }}
       onClick={handleCardClick}
+      role="button"
+      tabIndex={0}
+      aria-label={`Open details for ${tech.name}`}
     >
       <div className={`card-inner ${flipped ? 'is-flipped' : ''}`}>
         <div className="card-front">
@@ -49,17 +58,41 @@ const TechCard = ({ tech }) => {
           <div className="tech-description">
             <p>{tech.desc}</p>
           </div>
-          <button
-            className="learn-more-btn"
-            onClick={(ev) => {
-              // stop click from bubbling to card (avoids toggling flip)
-              ev.stopPropagation();
-              handleLearnMore();
-            }}
-          >
-            <i className="fas fa-external-link-alt"></i>
-            Learn More
-          </button>
+
+          {(Array.isArray(tech.dependencies) && tech.dependencies.length > 0) && (
+            <div className="tech-meta">
+              <span className="meta-label">Depends on:</span>
+              <div className="chips">
+                {tech.dependencies.map((d) => (<span key={d} className="chip chip-dep">{d}</span>))}
+              </div>
+            </div>
+          )}
+
+          {(Array.isArray(tech.leads_to) && tech.leads_to.length > 0) && (
+            <div className="tech-meta">
+              <span className="meta-label">Leads to:</span>
+              <div className="chips">
+                {tech.leads_to.map((d) => (<span key={d} className="chip chip-leads">{d}</span>))}
+              </div>
+            </div>
+          )}
+
+          <div className="card-actions">
+            <button
+              className="btn-ghost"
+              onClick={(ev) => { ev.stopPropagation(); openDetails(); }}
+            >
+              <i className="fas fa-layer-group"></i>
+              View Details
+            </button>
+            <button
+              className="learn-more-btn"
+              onClick={(ev) => { ev.stopPropagation(); openOfficial(); }}
+            >
+              <i className="fas fa-external-link-alt"></i>
+              Official Site
+            </button>
+          </div>
         </div>
       </div>
     </motion.div>
